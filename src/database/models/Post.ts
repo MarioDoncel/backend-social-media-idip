@@ -5,12 +5,13 @@ import { IPost } from '../../interfaces/Post';
 
 const schema = new mongoose.Schema<IPost>(
   {
-    user: {
+    userId: {
       type: Schema.Types.ObjectId,
       ref: 'users',
       required: true,
     },
     text: { type: String, required: true, maxlength: 500 },
+    image: { type: String },
     comments: [
       {
         text: { type: String, maxlength: 150 },

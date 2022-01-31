@@ -2,6 +2,7 @@ import { hash } from 'bcrypt';
 
 import { environmentVariables } from '../../../config/environment';
 import { tokensConfig } from '../../../config/tokens';
+import { ValidsRefreshTokenModel } from '../../../database/models/ValidRefreshTokens';
 import { IRefreshToken } from '../../../interfaces/RefreshToken';
 
 const { expiresIn: expiresInRefreshToken } = tokensConfig.refreshToken;
@@ -14,10 +15,16 @@ export const createRefreshTokenService = async (
     REFRESH_TOKEN_SECRET,
     Number(BCRYPT_SALT_ROUNDS)
   );
-  const refreshToken: IRefreshToken = {
+  // const refreshToken: IRefreshToken = {
+  //   accessId: id,
+  //   expiresIn: expiresInRefreshToken,
+  //   secret: encryptedSecret,
+  // };
+
+  const refreshToken: IRefreshToken = await ValidsRefreshTokenModel.create({
     accessId: id,
     expiresIn: expiresInRefreshToken,
     secret: encryptedSecret,
-  };
+  });
   return refreshToken;
 };
