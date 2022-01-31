@@ -1,6 +1,7 @@
 import express from 'express';
 
 import { createUserController } from '../useCases/users/controllers/createUser.controller';
+import { deleteUserController } from '../useCases/users/controllers/deleteUser.controller';
 import { followUserController } from '../useCases/users/controllers/followUser.controller';
 import { getAllUsersController } from '../useCases/users/controllers/getAllUsers.controller';
 import { getUserByIdController } from '../useCases/users/controllers/getUserById.controller';
@@ -17,6 +18,7 @@ const usersRouter = express.Router();
 usersRouter.get('/', getAllUsersController);
 usersRouter.get('/:userId', getUserByIdController);
 usersRouter.post('/', createUserController);
+usersRouter.delete('/', userBearerAuthMiddleware, deleteUserController);
 usersRouter.get(
   '/emailvalidation/token',
   userBasicAuthMiddleware,
