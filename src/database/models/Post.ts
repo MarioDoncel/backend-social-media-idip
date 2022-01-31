@@ -22,7 +22,7 @@ const schema = new mongoose.Schema<IPost>(
         createdAt: { type: Date, default: Date.now },
       },
     ],
-    likes: { type: [ObjectId], ref: 'users' },
+    likes: [{ type: Schema.Types.ObjectId, ref: 'users' }],
   },
   {
     timestamps: true,
