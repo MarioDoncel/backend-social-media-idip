@@ -5,8 +5,10 @@ import { followUserController } from '../useCases/users/controllers/followUser.c
 import { getAllUsersController } from '../useCases/users/controllers/getAllUsers.controller';
 import { getUserByIdController } from '../useCases/users/controllers/getUserById.controller';
 import { loginUserController } from '../useCases/users/controllers/loginUser.controller';
+import { sendNewValidationEmailUserController } from '../useCases/users/controllers/sendNewValidationEmailUser.controller';
 import { unfollowUserController } from '../useCases/users/controllers/unfollowUser.controller';
 import { updateUserController } from '../useCases/users/controllers/updateUser.controller';
+import { validateEmailUserController } from '../useCases/users/controllers/validateEmailUser.controller';
 import { userBasicAuthMiddleware } from '../useCases/users/middlewares/userBasicAuth';
 import { userBearerAuthMiddleware } from '../useCases/users/middlewares/userBearerAuth';
 
@@ -15,6 +17,12 @@ const usersRouter = express.Router();
 usersRouter.get('/', getAllUsersController);
 usersRouter.get('/:userId', getUserByIdController);
 usersRouter.post('/', createUserController);
+usersRouter.get(
+  '/emailvalidation',
+  userBasicAuthMiddleware,
+  sendNewValidationEmailUserController
+);
+usersRouter.post('/emailvalidation', validateEmailUserController);
 usersRouter.post('/login', userBasicAuthMiddleware, loginUserController);
 usersRouter.patch('/', userBearerAuthMiddleware, updateUserController);
 usersRouter.put('/:id/follow', userBearerAuthMiddleware, followUserController);
