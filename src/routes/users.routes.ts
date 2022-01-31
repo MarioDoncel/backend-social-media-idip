@@ -18,7 +18,7 @@ usersRouter.get('/', getAllUsersController);
 usersRouter.get('/:userId', getUserByIdController);
 usersRouter.post('/', createUserController);
 usersRouter.get(
-  '/emailvalidation',
+  '/emailvalidation/token',
   userBasicAuthMiddleware,
   sendNewValidationEmailUserController
 );

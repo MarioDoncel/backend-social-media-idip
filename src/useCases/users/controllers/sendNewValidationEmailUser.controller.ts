@@ -7,7 +7,7 @@ export const sendNewValidationEmailUserController = async (
   res: Response,
   next: NextFunction
 ) => {
-  const loggedUser = res.locals;
+  const loggedUser = res.locals.user;
 
   try {
     await sendUserVerificationEmailService(

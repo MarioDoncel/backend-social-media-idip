@@ -27,9 +27,10 @@ export const sendUserVerificationEmailService = async (
     subject: 'Email Verification',
     text: 'Please click on the link to confirm your email.',
     html: `<html>
-    <p>Please click on the link to confirm your email</p>
-    <a href="${CURRENT_DOMAIN}users/emailvalidation?token=${verificationToken}">Confirm Email</a>
-    <p>Link to confirm email:</br> ${CURRENT_DOMAIN}/users/validation/${verificationToken}</p></html>`,
+    <form method='POST' action='${CURRENT_DOMAIN}users/emailvalidation?token=${verificationToken}'><input type='hidden' value='1'>
+    <button type=submit'>Please click here to confirm your email</button>
+    </form>
+    </html>`,
   };
 
   try {

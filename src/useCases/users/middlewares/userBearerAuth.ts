@@ -28,6 +28,8 @@ export const userBearerAuthMiddleware = async (
         accessTokenIsValid.id
       );
       if (!user) throw new AppError('User not found');
+      if (!user.emailVerified)
+        throw new AppError('Email not verified for this user');
       user.password = '';
       res.locals.user = user;
       return next();
@@ -49,6 +51,8 @@ export const userBearerAuthMiddleware = async (
 
     const user: IUser | null = await getUserByIdService(userId);
     if (!user) throw new AppError('User not found');
+    if (!user.emailVerified)
+      throw new AppError('Email not verified for this user');
 
     const newAccessToken = createAccessTokenService(userId);
     const newRefreshToken = await createRefreshTokenService(userId);
