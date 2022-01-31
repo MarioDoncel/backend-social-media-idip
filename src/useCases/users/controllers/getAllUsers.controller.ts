@@ -8,7 +8,7 @@ export const getAllUsersController = async (
   next: NextFunction
 ) => {
   try {
-    const users = getAllUsersService();
+    const users = await getAllUsersService();
     return res.status(200).json(users);
   } catch (error) {
     return next(error);

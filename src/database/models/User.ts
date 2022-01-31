@@ -31,7 +31,6 @@ const schema = new mongoose.Schema<IUser>(
     postsTenLast: [
       {
         postId: { type: Schema.Types.ObjectId, ref: 'posts' },
-
         createdAt: { type: Date, required: true, default: Date.now },
       },
     ],
