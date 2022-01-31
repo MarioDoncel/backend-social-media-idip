@@ -1,9 +1,9 @@
-import express, { NextFunction, Request, Response } from 'express';
+import express from 'express';
+
+import { getAllPostsController } from '../useCases/posts/controllers/getAllPosts.controller';
 
 const postsRouter = express.Router();
 
-postsRouter.get('/', (req: Request, res: Response, next: NextFunction) => {
-  res.status(200).send('Hello Idip, we are live!');
-});
+postsRouter.get('/', getAllPostsController);
 
 export { postsRouter };

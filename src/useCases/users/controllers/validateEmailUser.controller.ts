@@ -23,9 +23,10 @@ export const validateEmailUserController = async (
 
     const id = decoded.sub;
     if (!id) throw new AppError('Validation failed');
-    const user: IUser = await setEmailVerifiedService(id);
 
-    return res.status(200).json(user);
+    await setEmailVerifiedService(id);
+
+    return res.status(200).json('Email Verified');
   } catch (error) {
     return next(error);
   }
