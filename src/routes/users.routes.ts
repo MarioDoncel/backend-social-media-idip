@@ -25,8 +25,8 @@ usersRouter.get(
 usersRouter.post('/emailvalidation', validateEmailUserController);
 usersRouter.post('/login', userBasicAuthMiddleware, loginUserController);
 usersRouter.patch('/', userBearerAuthMiddleware, updateUserController);
-usersRouter.put('/:id/follow', userBearerAuthMiddleware, followUserController);
-usersRouter.put(
+usersRouter.post('/:id/follow', userBearerAuthMiddleware, followUserController);
+usersRouter.delete(
   '/:id/unfollow',
   userBearerAuthMiddleware,
   unfollowUserController

@@ -15,7 +15,7 @@ const schema = new mongoose.Schema<IPost>(
     comments: [
       {
         text: { type: String, maxlength: 150 },
-        user: {
+        userId: {
           type: Schema.Types.ObjectId,
           ref: 'users',
         },

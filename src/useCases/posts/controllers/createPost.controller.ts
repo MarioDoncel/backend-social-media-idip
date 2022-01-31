@@ -9,7 +9,8 @@ export const createPostController = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { userId, text, image } = req.body;
+  const { text, image } = req.body;
+  const { id: userId } = res.locals.user;
   if (!userId || !text)
     throw new AppError('Post is missing required information');
 
