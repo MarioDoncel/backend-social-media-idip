@@ -1,9 +1,8 @@
 import { NextFunction, Response, Request } from 'express';
-import { MongooseDocument } from 'mongoose';
 
-import { UserModel } from '../../../database/models/User';
 import AppError from '../../../errors/appError';
 import { IUser } from '../../../interfaces/User';
+import { followUserService } from '../services/followUser.service';
 import { getUserByIdService } from '../services/getUserById.service';
 
 export const followUserController = async (
@@ -23,19 +22,9 @@ export const followUserController = async (
     const userToFollow: IUser | null = await getUserByIdService(idToFollow);
     if (!userToFollow) throw new AppError('User not found');
 
-    await UserModel.findOneAndUpdate(
-      { _id: loggedUser.id },
-      { $push: { followings: idToFollow } }
-    );
-    await UserModel.findOneAndUpdate(
-      { _id: idToFollow },
-      { $push: { followers: loggedUser.id } }
-    );
-    // await (userToFollow as unknown as Document).updateOne({
-    //   $push: { following: idToFollow },
-    // });
+    await followUserService(idToFollow, loggedUser.id);
 
-    return res.status(200).json('Following and followers updated');
+    return res.status(200).json('Followings and followers updated');
   } catch (error) {
     return next(error);
   }
