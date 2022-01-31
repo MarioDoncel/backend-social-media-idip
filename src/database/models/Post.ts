@@ -27,4 +27,4 @@ const schema = new mongoose.Schema<IPost>(
   }
 );
 
-export const UserModel = mongoose.model<IPost>('posts', schema);
+export const PostModel = mongoose.model<IPost>('posts', schema);
