@@ -5,6 +5,7 @@ import { sign } from 'jsonwebtoken';
 import { environmentVariables } from '../../../config/environment';
 import { tokensConfig } from '../../../config/tokens';
 import AppError from '../../../errors/appError';
+import { IRefreshToken } from '../../../interfaces/RefreshToken';
 import { IUser } from '../../../interfaces/User';
 import { createAccessTokenService } from '../services/createAccessToken.service';
 import { createRefreshTokenService } from '../services/createRefreshToken.service';
@@ -20,7 +21,9 @@ export const loginUserController = async (
 
   try {
     const accessToken = createAccessTokenService(id.toString());
-    const refreshToken = createRefreshTokenService(id.toString());
+    const refreshToken: IRefreshToken = await createRefreshTokenService(
+      id.toString()
+    );
 
     return res.status(200).json({ accessToken, refreshToken });
   } catch (error) {

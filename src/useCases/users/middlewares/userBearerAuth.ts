@@ -1,6 +1,5 @@
 import { NextFunction, Response, Request } from 'express';
 
-import { environmentVariables } from '../../../config/environment';
 import AppError from '../../../errors/appError';
 import { IUser } from '../../../interfaces/User';
 import { decodSubfromExpiredJWT } from '../../../utils/decodSubfromExpiredJWT';

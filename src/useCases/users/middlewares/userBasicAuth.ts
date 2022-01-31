@@ -24,11 +24,11 @@ export const userBasicAuthMiddleware = async (
     if (!user) throw new AppError('Invalid authentication credentials');
     if (!user.password) throw new AppError('Invalid user register');
 
-    const passwordMatchs = compare(password, user.password);
+    const passwordMatchs: boolean = await compare(password, user.password);
     if (!passwordMatchs)
       throw new AppError('Invalid authentication credentials');
 
-    delete user.password;
+    user.password = '';
     res.locals.user = user;
     next();
   } catch (error) {

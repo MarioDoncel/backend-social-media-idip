@@ -1,5 +1,7 @@
 import 'dotenv/config';
 import 'express-async-errors';
+import cookieParser from 'cookie-parser';
+import cors from 'cors';
 import express from 'express';
 
 import { MongoConnection } from './database/mongoConnection';
@@ -13,8 +15,10 @@ const PORT = process.env.PORT || 3000;
 
 const app = express();
 
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors({ origin: true, credentials: true }));
 
 MongoConnection();
 
