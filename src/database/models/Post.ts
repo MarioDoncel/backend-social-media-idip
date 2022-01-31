@@ -18,6 +18,7 @@ const schema = new mongoose.Schema<IPost>(
           type: Schema.Types.ObjectId,
           ref: 'users',
         },
+        createdAt: { type: Date, default: Date.now },
       },
     ],
     likes: { type: [ObjectId], ref: 'users' },

@@ -19,7 +19,7 @@ export const createUserService = async ({
     dateOfBirth,
     telephone,
     email,
-    password,
+    password: encryptedPassword,
   });
 
   return user;
