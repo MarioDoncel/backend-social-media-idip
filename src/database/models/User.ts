@@ -16,7 +16,7 @@ const schema = new mongoose.Schema<IUser>(
       required: true,
       default: 'https://via.placeholder.com/150',
     },
-    following: [
+    followings: [
       {
         type: Schema.Types.ObjectId,
         ref: 'users',

@@ -1,7 +1,7 @@
 import { ObjectId } from 'mongodb';
 
 export interface IPost {
-  _id: ObjectId;
+  id: ObjectId;
   user: ObjectId;
   text: string;
   comments?: [text: string, user: ObjectId];

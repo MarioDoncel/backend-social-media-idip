@@ -10,7 +10,7 @@ export interface IUser {
   emailVerified: boolean;
   password?: string;
   profileImage?: string;
-  following: ObjectId[];
+  followings: ObjectId[];
   followers: ObjectId[];
   postsTenLast: ObjectId[];
 }

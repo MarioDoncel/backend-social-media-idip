@@ -1,6 +1,7 @@
 import express from 'express';
 
 import { createUserController } from '../useCases/users/controllers/createUser.controller';
+import { followUserController } from '../useCases/users/controllers/followUser.controller';
 import { getAllUsersController } from '../useCases/users/controllers/getAllUsers.controller';
 import { getUserByIdController } from '../useCases/users/controllers/getUserById.controller';
 import { loginUserController } from '../useCases/users/controllers/loginUser.controller';
@@ -14,6 +15,7 @@ usersRouter.get('/', getAllUsersController);
 usersRouter.get('/:userId', getUserByIdController);
 usersRouter.post('/', createUserController);
 usersRouter.post('/login', userBasicAuthMiddleware, loginUserController);
-usersRouter.patch('/:userId', userBearerAuthMiddleware, updateUserController);
+usersRouter.patch('/', userBearerAuthMiddleware, updateUserController);
+usersRouter.put('/:id/follow', userBearerAuthMiddleware, followUserController);
 
 export { usersRouter };

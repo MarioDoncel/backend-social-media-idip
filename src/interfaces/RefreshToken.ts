@@ -1,5 +1,5 @@
 export interface IRefreshToken {
-  _id?: string;
+  id?: string;
   secret: string;
   accessId: string;
   expiresIn: number;

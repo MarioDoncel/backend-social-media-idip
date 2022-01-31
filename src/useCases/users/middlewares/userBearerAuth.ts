@@ -28,6 +28,7 @@ export const userBearerAuthMiddleware = async (
         accessTokenIsValid.id
       );
       if (!user) throw new AppError('User not found');
+      user.password = '';
       res.locals.user = user;
       return next();
     }
@@ -54,6 +55,7 @@ export const userBearerAuthMiddleware = async (
 
     setTokensInCookies(newAccessToken, newRefreshToken, res);
 
+    user.password = '';
     res.locals.user = user;
     return next();
   } catch (error) {

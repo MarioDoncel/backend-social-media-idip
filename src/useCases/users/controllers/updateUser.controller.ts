@@ -1,9 +1,7 @@
 import { NextFunction, Response, Request } from 'express';
 
-import { UserModel } from '../../../database/models/User';
 import AppError from '../../../errors/appError';
 import { IUser } from '../../../interfaces/User';
-import { getUserByIdService } from '../services/getUserById.service';
 import { updateUserService } from '../services/updateUser.service';
 
 export const updateUserController = async (
@@ -11,10 +9,12 @@ export const updateUserController = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { userId } = req.params;
+  const loggedUser: IUser = res.locals.user;
+  const { id } = loggedUser;
+  if (!id) throw new AppError('Error on user authentication');
   const updatedFields = req.body as Partial<IUser>;
   try {
-    const updatedUser = await updateUserService(userId, updatedFields);
+    const updatedUser = await updateUserService(id.toString(), updatedFields);
     if (!updatedUser) throw new AppError('User not found');
 
     return res.status(200).json(updatedUser);
