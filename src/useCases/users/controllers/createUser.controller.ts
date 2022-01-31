@@ -1,7 +1,9 @@
 import { NextFunction, Response, Request } from 'express';
 
+import AppError from '../../../errors/appError';
 import { IUser } from '../../../interfaces/User';
 import { createUserService } from '../services/createUser.service';
+import { sendUserVerificationEmailService } from '../services/sendUserVerificationEmail.service';
 
 export const createUserController = async (
   req: Request,
@@ -27,6 +29,9 @@ export const createUserController = async (
       email,
       password,
     });
+    if (!user.id) throw new AppError('Error on creating user');
+
+    await sendUserVerificationEmailService(user.email, user.id.toString());
 
     return res.status(200).json(user);
   } catch (error) {
