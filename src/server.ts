@@ -3,7 +3,9 @@ import 'express-async-errors';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import express from 'express';
+import cron from 'node-cron';
 
+import { deleteExpiredRefreshTokens } from './config/cronJob';
 import { MongoConnection } from './database/mongoConnection';
 import { castErrorHandler } from './middlewares/castErrorhandler';
 import { errorHandler } from './middlewares/errorHandler';
@@ -27,5 +29,7 @@ app.use(routes);
 app.use(mongoErrorHandler);
 app.use(castErrorHandler);
 app.use(errorHandler);
+
+cron.schedule('0 2 * * * ', deleteExpiredRefreshTokens);
 
 app.listen(PORT, () => console.log(`⚡️:Server is running on ${HOST}:${PORT}`));
