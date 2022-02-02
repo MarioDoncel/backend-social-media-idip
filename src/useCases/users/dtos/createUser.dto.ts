@@ -5,4 +5,5 @@ export interface ICreateUserDTO {
   telephone: string;
   email: string;
   password: string;
+  profileImage: string;
 }

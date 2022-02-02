@@ -12,17 +12,18 @@ export const createPostController = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { CURRENT_DOMAIN } = environmentVariables;
   const { text } = req.body;
   const { file } = req;
+  const { id: userId } = res.locals.user;
+  if (!userId || !text)
+    throw new AppError('Post is missing required information');
+
+  const { CURRENT_DOMAIN } = environmentVariables;
   let image;
   if (file) {
     const { filename } = file;
     image = `${CURRENT_DOMAIN}images/${filename}`;
   }
-  const { id: userId } = res.locals.user;
-  if (!userId || !text)
-    throw new AppError('Post is missing required information');
 
   try {
     const post: IPost = await createPostService({ userId, text, image });

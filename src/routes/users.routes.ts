@@ -1,5 +1,6 @@
 import express from 'express';
 
+import { upload } from '../middlewares/multer';
 import { createUserController } from '../useCases/users/controllers/createUser.controller';
 import { deleteUserController } from '../useCases/users/controllers/deleteUser.controller';
 import { followUserController } from '../useCases/users/controllers/followUser.controller';
@@ -18,7 +19,7 @@ const usersRouter = express.Router();
 
 usersRouter.get('/', getAllUsersController);
 usersRouter.get('/findbyid/:userId', getUserByIdController);
-usersRouter.post('/', createUserController);
+usersRouter.post('/', upload.single('file'), createUserController);
 usersRouter.delete('/', userBearerAuthMiddleware, deleteUserController);
 usersRouter.get(
   '/emailvalidation/newtoken',
@@ -28,7 +29,12 @@ usersRouter.get(
 usersRouter.get('/emailvalidation', validateEmailUserController);
 usersRouter.post('/login', userBasicAuthMiddleware, loginUserController);
 usersRouter.delete('/logout', userBasicAuthMiddleware, logoutUserController);
-usersRouter.patch('/', userBearerAuthMiddleware, updateUserController);
+usersRouter.patch(
+  '/',
+  userBearerAuthMiddleware,
+  upload.single('file'),
+  updateUserController
+);
 usersRouter.post('/:id/follow', userBearerAuthMiddleware, followUserController);
 usersRouter.delete(
   '/:id/unfollow',

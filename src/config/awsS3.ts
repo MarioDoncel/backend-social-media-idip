@@ -38,8 +38,8 @@ const saveS3 = async ({ filename }: { filename: string }) => {
     .promise();
 };
 
-const deleteS3 = async ({ name }: { name: string }) => {
-  const params = { Bucket: 'motivate-social', Key: name };
+const deleteS3 = async (filename: string) => {
+  const params = { Bucket: 'motivate-social', Key: filename };
 
   await s3
     .deleteObject(params, function (err, data) {
