@@ -1,5 +1,6 @@
 import express from 'express';
 
+import { upload } from '../middlewares/multer';
 import { commentPostController } from '../useCases/posts/controllers/commentPost.controller';
 import { createPostController } from '../useCases/posts/controllers/createPost.controller';
 import { deleteCommentPostController } from '../useCases/posts/controllers/deleteCommentPost.controller';
@@ -12,7 +13,12 @@ import { userBearerAuthMiddleware } from '../useCases/users/middlewares/userBear
 
 const postsRouter = express.Router();
 
-postsRouter.post('/', userBearerAuthMiddleware, createPostController);
+postsRouter.post(
+  '/',
+  userBearerAuthMiddleware,
+  upload.single('file'),
+  createPostController
+);
 postsRouter.delete('/:postId', userBearerAuthMiddleware, deletePostController);
 postsRouter.post(
   '/:postId/comment',

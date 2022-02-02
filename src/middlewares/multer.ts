@@ -3,7 +3,7 @@ import multer, { FileFilterCallback } from 'multer';
 
 const storage = multer.diskStorage({
   destination: (req, file, callback) => {
-    callback(null, './public/images');
+    callback(null, './tmp/uploads');
   },
   filename: (req, file, callback) => {
     callback(null, `${Date.now().toString()}-${file.originalname}`);

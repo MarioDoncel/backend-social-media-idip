@@ -17,7 +17,7 @@ import { userBearerAuthMiddleware } from '../useCases/users/middlewares/userBear
 const usersRouter = express.Router();
 
 usersRouter.get('/', getAllUsersController);
-usersRouter.get('/:userId', getUserByIdController);
+usersRouter.get('/findbyid/:userId', getUserByIdController);
 usersRouter.post('/', createUserController);
 usersRouter.delete('/', userBearerAuthMiddleware, deleteUserController);
 usersRouter.get(

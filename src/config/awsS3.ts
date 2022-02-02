@@ -15,7 +15,7 @@ declare type TUploadParams = {
 };
 
 const saveS3 = async ({ filename }: { filename: string }) => {
-  const originalPath = path.join('./public/images', filename);
+  const originalPath = path.join('./tmp/uploads', filename);
   const uploadParams: TUploadParams = { Bucket: 'motivate-social', Key: '' };
 
   // Configure the file stream and obtain the upload parameters

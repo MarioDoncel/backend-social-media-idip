@@ -29,11 +29,7 @@ export const sendUserVerificationEmailService = async (
     from: SENDGRID_EMAIL_FROM,
     subject: 'Email Verification',
     text: 'Please click on the link to confirm your email.',
-    html: `<html>
-    <form method='POST' action='${CURRENT_DOMAIN}users/emailvalidation?token=${verificationToken}'><input type='hidden' value='1'>
-    <button type=submit'>Please click here to confirm your email</button>
-    </form>
-    </html>`,
+    html,
   };
 
   try {
