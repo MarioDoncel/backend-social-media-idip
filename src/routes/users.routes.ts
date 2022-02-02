@@ -21,7 +21,7 @@ usersRouter.get('/:userId', getUserByIdController);
 usersRouter.post('/', createUserController);
 usersRouter.delete('/', userBearerAuthMiddleware, deleteUserController);
 usersRouter.get(
-  '/emailvalidation/token',
+  '/emailvalidation/newtoken',
   userBasicAuthMiddleware,
   sendNewValidationEmailUserController
 );

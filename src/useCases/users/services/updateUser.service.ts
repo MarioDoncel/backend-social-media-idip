@@ -3,11 +3,12 @@ import { IUser } from '../../../interfaces/User';
 
 export const updateUserService = async (
   _id: string,
-  updatedFields: Partial<IUser>
+  updateFields: Partial<IUser>
 ) => {
+  const { email } = updateFields;
   const updatedUser = await UserModel.findOneAndUpdate(
     { _id },
-    { ...updatedFields },
+    { ...updateFields, emailVerified: !email && false },
     { new: true }
   );
   return updatedUser;
