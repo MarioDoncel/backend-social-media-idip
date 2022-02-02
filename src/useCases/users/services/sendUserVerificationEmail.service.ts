@@ -2,6 +2,7 @@ import sgMail from '@sendgrid/mail';
 import { sign } from 'jsonwebtoken';
 
 import { environmentVariables } from '../../../config/environment';
+import { generateEmailHTML } from '../../../utils/generateHtmlForEmailConfirmation';
 
 const {
   SENDGRID_API_KEY,
@@ -21,6 +22,8 @@ export const sendUserVerificationEmailService = async (
     expiresIn: '1d',
   });
 
+  const linkToConfirmEmail = `${CURRENT_DOMAIN}users/emailvalidation?token=${verificationToken}`;
+  const html = generateEmailHTML(linkToConfirmEmail);
   const msg = {
     to: userEmail,
     from: SENDGRID_EMAIL_FROM,

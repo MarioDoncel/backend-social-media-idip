@@ -25,7 +25,7 @@ usersRouter.get(
   userBasicAuthMiddleware,
   sendNewValidationEmailUserController
 );
-usersRouter.post('/emailvalidation', validateEmailUserController);
+usersRouter.get('/emailvalidation', validateEmailUserController);
 usersRouter.post('/login', userBasicAuthMiddleware, loginUserController);
 usersRouter.delete('/logout', userBasicAuthMiddleware, logoutUserController);
 usersRouter.patch('/', userBearerAuthMiddleware, updateUserController);
