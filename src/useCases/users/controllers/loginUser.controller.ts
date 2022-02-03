@@ -7,6 +7,7 @@ import { tokensConfig } from '../../../config/tokens';
 import AppError from '../../../errors/appError';
 import { IRefreshToken } from '../../../interfaces/RefreshToken';
 import { IUser } from '../../../interfaces/User';
+import { setTokensInCookies } from '../../../utils/setTokensInCookies';
 import { createAccessTokenService } from '../services/createAccessToken.service';
 import { createRefreshTokenService } from '../services/createRefreshToken.service';
 
@@ -24,7 +25,7 @@ export const loginUserController = async (
     const refreshToken: IRefreshToken = await createRefreshTokenService(
       id.toString()
     );
-
+    setTokensInCookies(accessToken, refreshToken, res);
     return res.status(200).json({ accessToken, refreshToken });
   } catch (error) {
     return next(error);

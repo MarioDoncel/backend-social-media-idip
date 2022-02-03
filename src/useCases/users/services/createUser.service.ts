@@ -10,6 +10,7 @@ export const createUserService = async ({
   telephone,
   email,
   password,
+  profileImage,
 }: ICreateUserDTO): Promise<IUser> => {
   const encryptedPassword: string = await encryptPassword(password);
 
@@ -20,6 +21,7 @@ export const createUserService = async ({
     telephone,
     email,
     password: encryptedPassword,
+    profileImage,
   });
 
   return user;

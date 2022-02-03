@@ -6,6 +6,7 @@ import { deleteUserController } from '../useCases/users/controllers/deleteUser.c
 import { followUserController } from '../useCases/users/controllers/followUser.controller';
 import { getAllUsersController } from '../useCases/users/controllers/getAllUsers.controller';
 import { getUserByIdController } from '../useCases/users/controllers/getUserById.controller';
+import { isAuthController } from '../useCases/users/controllers/isAuth.controller';
 import { loginUserController } from '../useCases/users/controllers/loginUser.controller';
 import { logoutUserController } from '../useCases/users/controllers/logoutUser.controller';
 import { sendNewValidationEmailUserController } from '../useCases/users/controllers/sendNewValidationEmailUser.controller';
@@ -27,7 +28,8 @@ usersRouter.get(
   sendNewValidationEmailUserController
 );
 usersRouter.get('/emailvalidation', validateEmailUserController);
-usersRouter.post('/login', userBasicAuthMiddleware, loginUserController);
+usersRouter.get('/login', userBasicAuthMiddleware, loginUserController);
+usersRouter.get('/isauth', userBearerAuthMiddleware, isAuthController);
 usersRouter.delete('/logout', userBasicAuthMiddleware, logoutUserController);
 usersRouter.patch(
   '/',
