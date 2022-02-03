@@ -10,21 +10,30 @@ export const validateRefreshTokenUserService = async (
   refreshToken: IRefreshToken
 ) => {
   const { REFRESH_TOKEN_SECRET } = environmentVariables;
-  const withinValidity = refreshToken.expiresIn < Date.now();
-  if (!withinValidity) throw new AppError('RefreshToken expired');
+  try {
+    const withinValidity = refreshToken.expiresIn > Date.now();
+    if (!withinValidity) throw new AppError('RefreshToken expired');
 
-  if (id !== refreshToken.accessId) throw new AppError('RefreshToken Invalid');
+    if (id !== refreshToken.accessId)
+      throw new AppError('RefreshToken Invalid');
 
-  const validSecret = await compare(REFRESH_TOKEN_SECRET, refreshToken.secret);
+    const validSecret = await compare(
+      REFRESH_TOKEN_SECRET,
+      refreshToken.secret
+    );
 
-  if (!validSecret) throw new AppError('RefreshToken Invalid');
+    if (!validSecret) throw new AppError('RefreshToken Invalid');
 
-  const refreshTokenInDatabase = ValidsRefreshTokenModel.findById(
-    // eslint-disable-next-line no-underscore-dangle
-    refreshToken._id
-  );
+    const refreshTokenInDatabase = ValidsRefreshTokenModel.findById(
+      // eslint-disable-next-line no-underscore-dangle
+      refreshToken._id
+    );
 
-  if (!refreshTokenInDatabase) throw new AppError('RefreshToken Invalid');
+    if (!refreshTokenInDatabase) throw new AppError('RefreshToken Invalid');
 
-  return true;
+    return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
 };
