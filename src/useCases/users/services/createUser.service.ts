@@ -14,7 +14,7 @@ export const createUserService = async ({
 }: ICreateUserDTO): Promise<IUser> => {
   const encryptedPassword: string = await encryptPassword(password);
 
-  const user: IUser = await UserModel.create({
+  const userData = {
     firstName,
     lastName,
     dateOfBirth,
@@ -22,7 +22,10 @@ export const createUserService = async ({
     email,
     password: encryptedPassword,
     profileImage,
-  });
+  };
+  if (!profileImage) userData.profileImage = 'https://via.placeholder.com/150';
+
+  const user: IUser = await UserModel.create(userData);
 
   return user;
 };

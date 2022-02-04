@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "ts-node --transpile-only src/server.ts",
     "dev": "ts-node-dev --respawn --inspect --poll --transpile-only --ignore-watch node_modules --no-notify src/server.ts"
   },
   "keywords": [],

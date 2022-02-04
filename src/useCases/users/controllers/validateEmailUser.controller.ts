@@ -14,7 +14,7 @@ export const validateEmailUserController = async (
   const { token } = req.query;
   if (!token) throw new AppError('Validation failed');
 
-  const { VERIFICATION_EMAIL_SECRET } = environmentVariables;
+  const { VERIFICATION_EMAIL_SECRET, FRONT_DOMAIN } = environmentVariables;
 
   try {
     const decoded = verify(token.toString(), VERIFICATION_EMAIL_SECRET);
@@ -26,7 +26,7 @@ export const validateEmailUserController = async (
 
     await setEmailVerifiedService(id);
 
-    return res.status(200).redirect('/signin');
+    return res.status(200).redirect(`${FRONT_DOMAIN}signin`);
   } catch (error) {
     return next(error);
   }
