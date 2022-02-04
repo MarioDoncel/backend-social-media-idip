@@ -24,7 +24,7 @@ export const commentPostController = async (
     });
     if (!post) throw new AppError('Post not found');
 
-    return res.status(200).json(post.comments);
+    return res.status(201).json(post.comments);
   } catch (error) {
     return next(error);
   }

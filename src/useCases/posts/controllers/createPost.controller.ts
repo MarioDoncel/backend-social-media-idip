@@ -33,7 +33,7 @@ export const createPostController = async (
       unlinkSync(file.path);
     }
 
-    return res.status(200).json(post);
+    return res.status(201).json(post);
   } catch (error) {
     return next(error);
   }

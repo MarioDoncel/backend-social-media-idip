@@ -5,7 +5,7 @@ export interface IPost {
   userId: ObjectId;
   text: string;
   image?: string;
-  comments?: [text: string, userId: ObjectId];
+  comments?: { text: string; userId: ObjectId }[];
   likes?: ObjectId[];
   createdAt?: Date;
   updatedAt?: Date;
