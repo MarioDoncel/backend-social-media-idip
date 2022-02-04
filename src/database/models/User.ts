@@ -12,7 +12,7 @@ const schema = new mongoose.Schema<IUser>(
     dateOfBirth: { type: Date, required: true },
     telephone: { type: String, required: true, unique: true, trim: true },
     email: { type: String, required: true, unique: true, trim: true },
-    emailVerified: { type: Boolean, required: true, default: false },
+    emailVerified: { type: Boolean, required: true, default: true },
     password: { type: String, required: true },
     profileImage: {
       type: String,
