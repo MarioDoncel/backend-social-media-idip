@@ -22,9 +22,9 @@ export const followUserController = async (
     const userToFollow: IUser | null = await getUserByIdService(idToFollow);
     if (!userToFollow) throw new AppError('User not found');
 
-    await followUserService(idToFollow, loggedUser.id);
+    const updatedUser = await followUserService(idToFollow, loggedUser.id);
 
-    return res.status(200).json('Followings and followers updated');
+    return res.status(200).json(updatedUser);
   } catch (error) {
     return next(error);
   }

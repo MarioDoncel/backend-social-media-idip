@@ -20,6 +20,8 @@ export const updateUserController = async (
   const updateFields = req.body as Partial<IUser>;
   const { file } = req;
 
+  if (updateFields.email === loggedUser.email) updateFields.email = '';
+
   let profileImage;
   if (file) {
     const { filename } = file;

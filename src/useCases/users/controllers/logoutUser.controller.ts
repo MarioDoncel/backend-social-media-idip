@@ -22,7 +22,7 @@ export const logoutUserController = async (
       sameSite: 'none',
       secure: true,
     });
-    return res.status(200).send('success');
+    return res.status(200).json('Logout success');
   } catch (error) {
     return next(error);
   }

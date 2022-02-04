@@ -22,9 +22,12 @@ export const unfollowUserController = async (
     const userToUnfollow: IUser | null = await getUserByIdService(idToUnfollow);
     if (!userToUnfollow) throw new AppError('User not found');
 
-    await unfollowUserService(idToUnfollow, loggedUser.id);
+    const updatedLoggedUser = await unfollowUserService(
+      idToUnfollow,
+      loggedUser.id
+    );
 
-    return res.status(200).json('Followings and followers updated');
+    return res.status(200).json(updatedLoggedUser);
   } catch (error) {
     return next(error);
   }

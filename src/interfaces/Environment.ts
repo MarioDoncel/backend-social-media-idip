@@ -7,4 +7,5 @@ export interface IEnvironmentVariables {
   SENDGRID_EMAIL_FROM: string;
   CURRENT_DOMAIN: string;
   VERIFICATION_EMAIL_SECRET: string;
+  FRONT_DOMAIN: string;
 }

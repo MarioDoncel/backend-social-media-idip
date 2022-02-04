@@ -4,12 +4,14 @@ export const unfollowUserService = async (
   idToFollow: string,
   idLoggedUser: string
 ) => {
-  await UserModel.findOneAndUpdate(
+  const updatedUser = await UserModel.findOneAndUpdate(
     { _id: idLoggedUser },
-    { $pull: { followings: idToFollow } }
+    { $pull: { followings: idToFollow } },
+    { new: true }
   );
   await UserModel.findOneAndUpdate(
     { _id: idToFollow },
     { $pull: { followers: idLoggedUser } }
   );
+  return updatedUser;
 };

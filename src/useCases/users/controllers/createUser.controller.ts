@@ -23,11 +23,11 @@ export const createUserController = async (
   }: IUser = req.body;
   const { file } = req;
 
-  const { CURRENT_DOMAIN } = environmentVariables;
+  const { FRONT_DOMAIN } = environmentVariables;
   let profileImage = '';
   if (file) {
     const { filename } = file;
-    profileImage = `${CURRENT_DOMAIN}images/${filename}`;
+    profileImage = `${FRONT_DOMAIN}images/${filename}`;
   }
 
   try {

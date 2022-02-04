@@ -30,7 +30,7 @@ usersRouter.get(
 usersRouter.get('/emailvalidation', validateEmailUserController);
 usersRouter.get('/login', userBasicAuthMiddleware, loginUserController);
 usersRouter.get('/isauth', userBearerAuthMiddleware, isAuthController);
-usersRouter.delete('/logout', userBasicAuthMiddleware, logoutUserController);
+usersRouter.delete('/logout', logoutUserController);
 usersRouter.patch(
   '/',
   userBearerAuthMiddleware,
