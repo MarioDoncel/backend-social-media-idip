@@ -26,7 +26,7 @@ export const validateEmailUserController = async (
 
     await setEmailVerifiedService(id);
 
-    return res.status(200).redirect(`${FRONT_DOMAIN}signin`);
+    return res.status(200).redirect(`${FRONT_DOMAIN}`);
   } catch (error) {
     return next(error);
   }
