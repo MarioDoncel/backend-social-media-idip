@@ -6,7 +6,7 @@ export const createPostService = async ({
   text,
   image = '',
 }: ICreatePostDto) => {
-  const post = PostModel.create({
+  const post = await PostModel.create({
     userId,
     text,
     image,
